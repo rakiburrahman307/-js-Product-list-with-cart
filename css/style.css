@@ -101,7 +101,7 @@ body {
     transition: all 0.3s ease-in-out;
     position: absolute;
     bottom: -20px;
-    right: 40px;
+    right: 20px;
 }
 
 .product-button:hover {
@@ -173,20 +173,12 @@ body {
     font-size: 12px;
 }
 
-.product-cart-item button {
-    background-color: red;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 50px;
-    transition: all 0.3s ease;
+.product-cart-item .remove-icon {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
 }
 
-.product-cart-item button:hover {
-    background-color: rgb(173, 28, 28);
-    scale: inherit;
-    cursor: pointer;
-}
 
 .cart-item-container .cart-item-name{
     color: hsl(14, 65%, 9%);

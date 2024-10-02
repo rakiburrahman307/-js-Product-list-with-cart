@@ -71,8 +71,8 @@ const handleAddCart = async (productId) => {
     <p class="cart-item-total">$ ${product?.quantity * product?.price}</p>
 </div>
 </div>
-            <button onclick="handleRemoveFromCart(${product?.id
-                })">Remove</button>
+            <img class="remove-icon" onclick="handleRemoveFromCart(${product?.id})" src="./assets/images/icon-remove-item.svg" alt="icon-remove-item" />
+
             <hr/>
         </li>
     `;
