@@ -1,39 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
-
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./assets/images/favicon-32x32.png"
-    />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
     <link rel="stylesheet" href="css/style.css" />
     <title>Frontend Mentor | Product list with cart</title>
-  </head>
-
-  <body>
+</head>
+<body>
     <section class="container">
-      <h2 class="heading">Desserts</h2>
-      <div class="content-container">
-        <div class="product-list"></div>
-        <div class="product-cart">
-          <div class="product-cart-container">
-            <h2 class="cart-title">Your Cart (7)</h2>
-            <ul class="product-cart-items">
-            
-              <!-- dynamic product added to cart  -->
-            </ul>
-            <p>Total: $0.00</p>
-            <button>Checkout</button>
-          </div>
+        <h2 class="heading">Desserts</h2>
+        <div class="content-container">
+            <div class="product-list"></div> <!-- Products rendered here -->
+            <div class="product-cart">
+                <div class="product-cart-container">
+                    <h2 class="cart-title">Your Cart (7)</h2>
+                    <ul class="product-cart-items">
+                        <!-- dynamic products added to cart -->
+                    </ul>
+                    <p class="cart-total">Total: $0.00</p> <!-- Update here -->
+                    <button>Checkout</button>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
-    <!-- script file  -->
+    <!-- script file -->
     <script src="js/script.js"></script>
-  </body>
+</body>
 </html>
