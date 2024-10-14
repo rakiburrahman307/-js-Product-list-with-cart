@@ -1,40 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <title>Frontend Mentor | Product list with cart</title>
-</head>
-<body>
+  </head>
+  <body>
     <section class="container">
-        <h2 class="heading">Desserts</h2>
-        <div class="content-container">
-            <div class="product-list"></div> <!-- Products rendered here -->
-            <div class="product-cart">
-                <div class="product-cart-container">
-                    <h2 class="cart-title">Your Cart (7)</h2>
-                    <ul class="product-cart-items">
-                       
-                        <!-- dynamic products added to cart -->
-                    </ul>
-                    <div class="cart-total">
-                        <p class="cart-total_title">Order Total:</p> 
-                        <p class="cart-total_price"></p> 
-                      </div>
-                      
-                    <div class="icon-carbon">
-                            <img src="./assets/images/icon-carbon-neutral.svg" alt="icon-carbon-neutral" />
-               
-                        <p class="text-carbon">This is a <span>carbon-neutral</span> delivery</p>
-                    </div>
-                    <button class="checkout-btn">Conform Order</button>
-                </div>
+      <h2 class="heading">Desserts</h2>
+      <div class="content-container">
+        <div class="product-list"></div>
+        <!-- Products rendered here -->
+        <div class="product-cart">
+          <div class="product-cart-container">
+            <h2 class="cart-title"></h2>
+            <ul class="product-cart-items">
+              <!-- dynamic products added to cart -->
+            </ul>
+            <div class="cart-checkout-container">
+              <div class="cart-total">
+                <p class="cart-total_title">Order Total:</p>
+                <p class="cart-total_price"></p>
+              </div>
+
+              <div class="icon-carbon">
+                <img
+                  src="./assets/images/icon-carbon-neutral.svg"
+                  alt="icon-carbon-neutral"
+                />
+
+                <p class="text-carbon">
+                  This is a <span>carbon-neutral</span> delivery
+                </p>
+              </div>
+              <button class="checkout-btn"  id="openModalBtn">Conform Order</button>
             </div>
+          </div>
         </div>
+        <!-- Order Confirmation Modal -->
+        <div class="modal_container" id="orderModal">
+          <div class="modal_content">
+           <div class="modal_conten   t_container">
+            <img class="icon_order_confirmed" src="./assets/images/icon-order-confirmed.svg" alt="icon-order-confirmed">
+            <h2 class="order_confirm_heading">Order Confirmed</h2>
+            <p class="order-confirm_subheading">We hope you enjoy the food</p>
+           </div>
+            <div class="modal_buttons">
+              <button class="close_modal_btn" id="closeModalBtn">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- script file -->
     <script src="js/script.js"></script>
-</body>
+  </body>
 </html>

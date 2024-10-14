@@ -1,4 +1,5 @@
 const cartItemsContainer = document.querySelector(".product-cart-items");
+
 let products = [];
 let cart = [];
 
@@ -16,16 +17,18 @@ const fetchData = async () => {
 };
 
 const renderProducts = (products) => {
+
   const productList = document.querySelector(".product-list");
   productList.innerHTML = products
     .map((product) => {
       const cartItem = cart.find((item) => item.id === product.id);
       const quantity = cartItem ? cartItem.quantity : 0;
+    
 
       return `
         <div class="product-item">
             <div class="product-img-container">
-                <img src="${product?.image?.thumbnail}" alt="${
+                <img class="product-thumbnail" style="${quantity > 0 ? 'border: 3px solid hsl(14, 86%, 42%)' : ''}" src="${product?.image?.thumbnail}" alt="${
         product?.name
       }" />
                 ${
@@ -47,8 +50,18 @@ const renderProducts = (products) => {
     })
     .join("");
 };
+const handleToggleContainer = () => {
+  const checkoutContainer = document.querySelector(".cart-checkout-container");
 
+  if (cart.length === 0) {
+    checkoutContainer.style.display = "none";
+  } else {
+    checkoutContainer.style.display = "block";
+  }
+};
 const renderCartItems = () => {
+  const cartTitle = document.querySelector(".cart-title");
+  cartTitle.textContent = `Your Cart (${cart.length})`;
   // Clear the cart container before rendering
   cartItemsContainer.innerHTML = "";
 
@@ -58,6 +71,7 @@ const renderCartItems = () => {
                             <p class="empty-cart-title">Your added item will appear here</p>
                         </div>`;
     handleCalculateTotalPrice();
+    handleToggleContainer();
     return;
   }
 
@@ -90,6 +104,7 @@ const renderCartItems = () => {
   });
 
   handleCalculateTotalPrice();
+  handleToggleContainer();
 };
 
 const handleAddCart = (productId) => {
@@ -148,5 +163,28 @@ const handleRemoveFromCart = (id) => {
   renderProducts(products);
   renderCartItems();
 };
+
+// Get elements
+const openModalBtn = document.getElementById("openModalBtn");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const orderModal = document.getElementById("orderModal");
+
+// Open Modal
+openModalBtn.addEventListener("click", () => {
+  orderModal.style.display = "flex";
+});
+
+// Close Modal
+closeModalBtn.addEventListener("click", () => {
+  orderModal.style.display = "none";
+});
+
+// Optional: Close modal when clicking outside the modal content
+window.addEventListener("click", (e) => {
+  if (e.target === orderModal) {
+    orderModal.style.display = "none";
+  }
+});
 fetchData();
 renderCartItems();
+handleToggleContainer();
