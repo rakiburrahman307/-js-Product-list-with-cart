@@ -1,4 +1,5 @@
 const cartItemsContainer = document.querySelector(".product-cart-items");
+const conformCartItems = document.querySelector(".confirm_cart_items");
 
 let products = [];
 let cart = [];
@@ -17,20 +18,18 @@ const fetchData = async () => {
 };
 
 const renderProducts = (products) => {
-
   const productList = document.querySelector(".product-list");
   productList.innerHTML = products
     .map((product) => {
       const cartItem = cart.find((item) => item.id === product.id);
       const quantity = cartItem ? cartItem.quantity : 0;
-    
 
       return `
         <div class="product-item">
             <div class="product-img-container">
-                <img class="product-thumbnail" style="${quantity > 0 ? 'border: 3px solid hsl(14, 86%, 42%)' : ''}" src="${product?.image?.thumbnail}" alt="${
-        product?.name
-      }" />
+                <img class="product-thumbnail" style="${
+                  quantity > 0 ? "border: 3px solid hsl(14, 86%, 42%)" : ""
+                }" src="${product?.image?.thumbnail}" alt="${product?.name}" />
                 ${
                   quantity > 0
                     ? `<div class="cartQuantity-container">
@@ -106,7 +105,29 @@ const renderCartItems = () => {
   handleCalculateTotalPrice();
   handleToggleContainer();
 };
-
+const renderConfirmCartItem = () => {
+  conformCartItems.innerHTML = "";
+  // Render each cart item
+  cart.forEach((item) => {
+    conformCartItems.innerHTML += `
+          <li class="confirm_cart_item" data-id="${item?.id}">
+              <div class="confirm_item_container">
+                  <h3 class="confirm_item_name">${
+                    item?.name}</h3>
+                  <div class="confirm_item_details">
+                    <div class="confirm_item_price">
+                     <p class="confirm_item_quantity">${item?.quantity}x</p>
+                      <p class="cart_item_price">@ $${item?.price}</p>
+                      </div>
+                      <p class="confirm_item_total">$${(
+                        item?.price * item?.quantity
+                      ).toFixed(2)}</p>
+                  </div>
+              </div>
+          </li>
+           `;
+  });
+};
 const handleAddCart = (productId) => {
   const product = products.find((item) => item.id === productId);
   const existingItem = cart.find((item) => item.id === productId);
@@ -142,11 +163,11 @@ const handleDecreaseCartItem = (id) => {
     renderCartItems(); // Re-render cart
   }
 };
-
+// total price calculation
 const handleCalculateTotalPrice = () => {
   let total = 0;
-  if (cart.length > 0) {
-    cart.forEach((item) => {
+  if (cart?.length > 0) {
+    cart?.forEach((item) => {
       total += item?.price * item?.quantity;
     });
   }
@@ -156,8 +177,12 @@ const handleCalculateTotalPrice = () => {
   if (cartTotalElement) {
     cartTotalElement.textContent = `$${total > 0 ? total.toFixed(2) : "0.00"}`;
   }
+    // Select the total price element in the modal
+    const modalTotalElement = document.querySelector(".modal_container .cart-total_price");
+    if (modalTotalElement) {
+      modalTotalElement.textContent = `$${total > 0 ? total.toFixed(2) : "0.00"}`;
+    }
 };
-
 const handleRemoveFromCart = (id) => {
   cart = cart.filter((item) => item.id !== id);
   renderProducts(products);
@@ -172,6 +197,10 @@ const orderModal = document.getElementById("orderModal");
 // Open Modal
 openModalBtn.addEventListener("click", () => {
   orderModal.style.display = "flex";
+  renderConfirmCartItem();
+  setTimeout(() => {
+    handleCalculateTotalPrice();
+  }, 100);
 });
 
 // Close Modal
@@ -185,6 +214,7 @@ window.addEventListener("click", (e) => {
     orderModal.style.display = "none";
   }
 });
+
 fetchData();
 renderCartItems();
 handleToggleContainer();
