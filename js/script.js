@@ -1,9 +1,14 @@
+// Get elements
+const openModalBtn = document.getElementById("openModalBtn");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const orderModal = document.getElementById("orderModal");
 const cartItemsContainer = document.querySelector(".product-cart-items");
 const conformCartItems = document.querySelector(".confirm_cart_items");
-
+// store items
 let products = [];
 let cart = [];
 
+// fetch all the data
 const fetchData = async () => {
   try {
     const response = await fetch("data.json");
@@ -16,7 +21,7 @@ const fetchData = async () => {
     console.error("Fetch error:", error);
   }
 };
-
+//  render product items
 const renderProducts = (products) => {
   const productList = document.querySelector(".product-list");
   productList.innerHTML = products
@@ -49,6 +54,7 @@ const renderProducts = (products) => {
     })
     .join("");
 };
+// Toggle container
 const handleToggleContainer = () => {
   const checkoutContainer = document.querySelector(".cart-checkout-container");
 
@@ -58,6 +64,7 @@ const handleToggleContainer = () => {
     checkoutContainer.style.display = "block";
   }
 };
+// render car items
 const renderCartItems = () => {
   const cartTitle = document.querySelector(".cart-title");
   cartTitle.textContent = `Your Cart (${cart.length})`;
@@ -105,6 +112,8 @@ const renderCartItems = () => {
   handleCalculateTotalPrice();
   handleToggleContainer();
 };
+
+// render confirm cart item
 const renderConfirmCartItem = () => {
   conformCartItems.innerHTML = "";
   // Render each cart item
@@ -112,8 +121,7 @@ const renderConfirmCartItem = () => {
     conformCartItems.innerHTML += `
           <li class="confirm_cart_item" data-id="${item?.id}">
               <div class="confirm_item_container">
-                  <h3 class="confirm_item_name">${
-                    item?.name}</h3>
+                  <h3 class="confirm_item_name">${item?.name}</h3>
                   <div class="confirm_item_details">
                     <div class="confirm_item_price">
                      <p class="confirm_item_quantity">${item?.quantity}x</p>
@@ -128,6 +136,8 @@ const renderConfirmCartItem = () => {
            `;
   });
 };
+
+// Add item from cart
 const handleAddCart = (productId) => {
   const product = products.find((item) => item.id === productId);
   const existingItem = cart.find((item) => item.id === productId);
@@ -138,31 +148,32 @@ const handleAddCart = (productId) => {
     cart.push({ ...product, quantity: 1 });
   }
 
-  renderProducts(products); // Re-render the product list
-  renderCartItems(); // Re-render the cart items
+  renderProducts(products);
+  renderCartItems();
 };
-
+// increase items
 const handleIncreaseCartItem = (id) => {
   const cartItem = cart.find((item) => item.id === id);
   if (cartItem) {
     cartItem.quantity += 1;
-    renderProducts(products); // Re-render products
-    renderCartItems(); // Re-render cart
+    renderProducts(products);
+    renderCartItems();
   }
 };
-
+//  decrease items
 const handleDecreaseCartItem = (id) => {
   const cartItem = cart.find((item) => item.id === id);
   if (cartItem && cartItem.quantity > 1) {
     cartItem.quantity -= 1;
-    renderProducts(products); // Re-render products
-    renderCartItems(); // Re-render cart
+    renderProducts(products);
+    renderCartItems();
   } else {
-    cart = cart.filter((item) => item.id !== id); // Remove item from cart
-    renderProducts(products); // Re-render products
-    renderCartItems(); // Re-render cart
+    cart = cart.filter((item) => item.id !== id);
+    renderProducts(products);
+    renderCartItems();
   }
 };
+
 // total price calculation
 const handleCalculateTotalPrice = () => {
   let total = 0;
@@ -177,22 +188,21 @@ const handleCalculateTotalPrice = () => {
   if (cartTotalElement) {
     cartTotalElement.textContent = `$${total > 0 ? total.toFixed(2) : "0.00"}`;
   }
-    // Select the total price element in the modal
-    const modalTotalElement = document.querySelector(".modal_container .cart-total_price");
-    if (modalTotalElement) {
-      modalTotalElement.textContent = `$${total > 0 ? total.toFixed(2) : "0.00"}`;
-    }
+  // Select the total price element in the modal
+  const modalTotalElement = document.querySelector(
+    ".modal_container .cart-total_price"
+  );
+  if (modalTotalElement) {
+    modalTotalElement.textContent = `$${total > 0 ? total.toFixed(2) : "0.00"}`;
+  }
 };
+
+// Remove item from cart
 const handleRemoveFromCart = (id) => {
   cart = cart.filter((item) => item.id !== id);
   renderProducts(products);
   renderCartItems();
 };
-
-// Get elements
-const openModalBtn = document.getElementById("openModalBtn");
-const closeModalBtn = document.getElementById("closeModalBtn");
-const orderModal = document.getElementById("orderModal");
 
 // Open Modal
 openModalBtn.addEventListener("click", () => {
@@ -207,8 +217,7 @@ openModalBtn.addEventListener("click", () => {
 closeModalBtn.addEventListener("click", () => {
   orderModal.style.display = "none";
 });
-
-// Optional: Close modal when clicking outside the modal content
+// modal outside click
 window.addEventListener("click", (e) => {
   if (e.target === orderModal) {
     orderModal.style.display = "none";
