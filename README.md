@@ -31,27 +31,21 @@ The Product List with Cart includes:
 - **Cart Functionality:** Users can add products to the cart, update quantities, remove items, and see real-time price updates.
 - **Order Confirmation:** A modal window confirms the user's order with details on items selected and total cost.
 - **Hover and Focus States:** Clear hover and focus indicators on interactive elements.
-  
+
 ## Technologies Used
 
 - **HTML5:** For structuring the webpage content.
 - **CSS3:** For styling the layout and ensuring responsiveness across devices.
 - **JavaScript:** For handling dynamic cart actions such as adding/removing products and updating the order details.
 
-## Usage
-
-To view the project:
-
-1. Clone or download the repository from [GitHub](your-github-link-here).
-2. Open the `index.html` file in your preferred browser to see the project in action.
-
 ## Attributions
 
-Design crafted with care by **Md Rakibur Rahman** ✨🎨🚀
+Design crafted with care by **Md. Rakibur Rahman** ✨🎨🚀
 
-- [GitHub](your-github-link-here)
-- [LinkedIn](your-linkedin-link-here)
-- [Live Demo](your-live-link-here)
+- [GitHub](https://github.com/rakiburrahman307)
+- [LinkedIn](https://www.linkedin.com/in/md-rakibur-rahman-14b33a2a4/)
+- [Email Me](mailto:rakiburrahman307@gmail.com)
+- [Live Demo](https://product-list-with-cart-challange.netlify.app/)
 
 ## Additional Resources
 
