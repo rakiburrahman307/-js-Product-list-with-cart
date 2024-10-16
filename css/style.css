@@ -224,6 +224,9 @@ body {
   width: 15px;
   height: 15px;
 }
+.cartQuantity-container .quantity{
+  color: white;
+}
 .empty-cart-container {
   display: flex;
   flex-direction: column;

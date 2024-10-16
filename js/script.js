@@ -216,6 +216,9 @@ openModalBtn.addEventListener("click", () => {
 // Close Modal
 closeModalBtn.addEventListener("click", () => {
   orderModal.style.display = "none";
+  cart = [];
+  renderCartItems();
+  renderProducts(products);
 });
 // modal outside click
 window.addEventListener("click", (e) => {
